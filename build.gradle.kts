@@ -8,9 +8,9 @@ plugins {
     id("maven-publish")
 }
 
-group = "com.rhinea"
+group = "com.rhine"
 version = "0.0.1-SNAPSHOT"
-description = "rhine-framework"
+description = "rhine-server-framework"
 
 java {
     toolchain {
@@ -66,7 +66,7 @@ publishing {
         create("mavenJava", org.gradle.api.publish.maven.MavenPublication::class) {
             from(components["java"])
             groupId = group.toString()
-            artifactId = "rhine-framework"
+            artifactId = "rhine-server-framework"
             version = project.version.toString()
         }
     }

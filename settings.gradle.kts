@@ -1,1 +1,1 @@
-rootProject.name = "rhine-framework"
+rootProject.name = "rhine-server-framework"
