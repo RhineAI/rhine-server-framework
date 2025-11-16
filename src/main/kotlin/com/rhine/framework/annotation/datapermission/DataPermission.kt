@@ -57,5 +57,11 @@ annotation class DataPermission(
     /**
      * Parameter name to pass the ID list resolved by provider mode (default 'aclIds').
      */
-    val providerParamName: String = "aclIds"
+    val providerParamName: String = "aclIds",
+
+    /**
+     * When provider mode is enabled, optionally override the object type name used by the provider
+     * to resolve ACL IDs (e.g. specify "o-flow-project.project" instead of deriving from @Table).
+     */
+    val providerObjectType: String = ""
 )

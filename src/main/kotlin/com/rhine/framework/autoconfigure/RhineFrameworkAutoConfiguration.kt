@@ -3,6 +3,7 @@ package com.rhine.framework.autoconfigure
 import com.rhine.framework.annotation.apilog.ApiLogAspect
 import com.rhine.framework.annotation.apilog.ApiLogProperties
 import com.rhine.framework.config.RedisConfig
+import com.rhine.framework.config.OpenApiConfig
 import com.rhine.framework.exception.RestExceptionHandler
 import com.rhine.framework.redis.BaseRedis
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
@@ -19,10 +20,11 @@ import jakarta.persistence.EntityManagerFactory
 import com.rhine.framework.annotation.datapermission.DataPermissionProperties
 import com.rhine.framework.annotation.datapermission.AclIdsProvider
 import org.springframework.data.redis.core.RedisTemplate
+import com.rhine.framework.spring.SpringContextHolder
 
 @Configuration
 @EnableConfigurationProperties(value = [ApiLogProperties::class, DataPermissionProperties::class])
-@Import(RedisConfig::class)
+@Import(RedisConfig::class, OpenApiConfig::class)
 class RhineFrameworkAutoConfiguration {
 
     @Bean
@@ -37,6 +39,10 @@ class RhineFrameworkAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     fun restExceptionHandler(): RestExceptionHandler = RestExceptionHandler()
+
+    @Bean
+    @ConditionalOnMissingBean
+    fun springContextHolder(): SpringContextHolder = SpringContextHolder()
 
     // Data permission aspect: works with JPA to enable a Hibernate filter per request
     @Bean

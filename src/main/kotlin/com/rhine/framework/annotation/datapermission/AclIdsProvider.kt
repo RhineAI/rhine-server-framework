@@ -17,7 +17,7 @@ interface AclIdsProvider {
      * @param userId the current user id (never blank)
      * @param tenantId the current tenant id when multi-tenant is enabled, otherwise null
      */
-    fun resolveIds(filterName: String, entityClass: Class<*>, userId: String, tenantId: String?): Collection<*>
+    fun resolveIds(filterName: String, entityClass: Class<*>, userId: String, tenantId: String?, objectTypeOverride: String? = null): Collection<*>
 }
 
 /**
@@ -25,5 +25,5 @@ interface AclIdsProvider {
  * the aspect will throw to avoid misconfiguration.
  */
 class NoopAclIdsProvider : AclIdsProvider {
-    override fun resolveIds(filterName: String, entityClass: Class<*>, userId: String, tenantId: String?): Collection<*> = emptyList<Any>()
+    override fun resolveIds(filterName: String, entityClass: Class<*>, userId: String, tenantId: String?, objectTypeOverride: String?): Collection<*> = emptyList<Any>()
 }

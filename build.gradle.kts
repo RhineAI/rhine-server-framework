@@ -35,6 +35,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     
+    // removed explicit Spring 5.x dependencies; rely on Spring Boot managed versions
     // Web base (RestControllerAdvice, ResponseEntity, etc.)
     implementation("org.springframework.boot:spring-boot-starter-web")
 
@@ -55,6 +56,8 @@ dependencies {
     // Embedded H2 database for JPA tests
     testImplementation("com.h2database:h2")
 
+    // OpenAPI models for compile-time; runtime provided by services using springdoc
+    compileOnly("io.swagger.core.v3:swagger-models:2.2.21")
 }
 
 // Build as library: enable jar, disable bootJar
@@ -66,7 +69,7 @@ publishing {
         create("mavenJava", org.gradle.api.publish.maven.MavenPublication::class) {
             from(components["java"])
             groupId = group.toString()
-            artifactId = "rhine-server-framework"
+            artifactId = "rhine-framework"
             version = project.version.toString()
         }
     }

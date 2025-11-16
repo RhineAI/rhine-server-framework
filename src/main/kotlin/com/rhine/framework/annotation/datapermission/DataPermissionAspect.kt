@@ -52,6 +52,7 @@ class DataPermissionAspect(
         val tenantParamName = permission.tenantParamName.ifBlank { properties.tenantParamName }
         val useProvider = permission.useProvider || properties.useProvider
         val providerParamName = permission.providerParamName.ifBlank { properties.providerParamName }
+        val providerObjectType = permission.providerObjectType
 
         val (userId, tenantId) = if (useSecurity) {
             extractFromSecurity(multiTenant)
@@ -68,9 +69,13 @@ class DataPermissionAspect(
             if (useProvider) {
                 val targetClass = resolveTargetDomainClass(pjp)
                 val provider = resolveProvider(filterName)
-                val ids = provider.resolveIds(filterName, targetClass, userId, if (multiTenant) tenantId else null)
+                val ids = provider.resolveIds(filterName, targetClass, userId, if (multiTenant) tenantId else null, providerObjectType.takeIf { it.isNotBlank() })
                 @Suppress("UNCHECKED_CAST")
-                filter.setParameter(providerParamName, ids)
+                if (ids is Collection<*>) {
+                    filter.setParameterList(providerParamName, ids)
+                } else {
+                    filter.setParameter(providerParamName, ids)
+                }
                 if (multiTenant) {
                     // Provider-mode filters may also include tenant condition when multi-tenant is enabled
                     filter.setParameter(tenantParamName, tenantId ?: throw NoPermissionException())
