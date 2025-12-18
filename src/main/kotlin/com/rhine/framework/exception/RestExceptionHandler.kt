@@ -13,9 +13,26 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.validation.BindException
 
+import org.springframework.security.authentication.InternalAuthenticationServiceException
+import org.springframework.security.core.AuthenticationException
+
 @RestControllerAdvice
 class RestExceptionHandler {
     private val log = LoggerFactory.getLogger(RestExceptionHandler::class.java)
+
+    @ExceptionHandler(value = [InternalAuthenticationServiceException::class, AuthenticationException::class])
+    fun handleAuthenticationException(ex: Exception, request: HttpServletRequest): ResponseEntity<ErrorResponse> {
+        var cause: Throwable? = ex
+        while (cause != null) {
+            if (cause is BusinessException) {
+                return handleBusinessException(cause, request)
+            }
+            cause = cause.cause
+        }
+        log.warn("Authentication error: {}", ex.message)
+        val body = ErrorResponse(code = CommonErrorCode.AUTHENTICATION_FAILED.code, message = ex.message ?: CommonErrorCode.AUTHENTICATION_FAILED.message, path = request.requestURI)
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(body)
+    }
 
     @ExceptionHandler(BusinessException::class)
     fun handleBusinessException(ex: BusinessException, request: HttpServletRequest): ResponseEntity<ErrorResponse> {
@@ -48,6 +65,13 @@ class RestExceptionHandler {
     @ExceptionHandler(Exception::class)
     fun handleGenericException(ex: Exception, request: HttpServletRequest): ResponseEntity<ErrorResponse> {
         log.error("Unhandled exception", ex)
+         var cause: Throwable? = ex
+        while (cause != null) {
+            if (cause is BusinessException) {
+                return handleBusinessException(cause, request)
+            }
+            cause = cause.cause
+        }
         val body = ErrorResponse(code = CommonErrorCode.INTERNAL_ERROR.code, message = CommonErrorCode.INTERNAL_ERROR.message, path = request.requestURI)
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body)
     }

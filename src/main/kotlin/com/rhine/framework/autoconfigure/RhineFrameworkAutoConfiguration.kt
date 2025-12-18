@@ -2,9 +2,9 @@ package com.rhine.framework.autoconfigure
 
 import com.rhine.framework.annotation.apilog.ApiLogAspect
 import com.rhine.framework.annotation.apilog.ApiLogProperties
+import com.rhine.framework.config.JacksonFormatConfig
 import com.rhine.framework.config.RedisConfig
 import com.rhine.framework.config.OpenApiConfig
-import com.rhine.framework.exception.RestExceptionHandler
 import com.rhine.framework.redis.BaseRedis
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
@@ -24,7 +24,7 @@ import com.rhine.framework.spring.SpringContextHolder
 
 @Configuration
 @EnableConfigurationProperties(value = [ApiLogProperties::class, DataPermissionProperties::class])
-@Import(RedisConfig::class, OpenApiConfig::class)
+@Import(RedisConfig::class, OpenApiConfig::class, JacksonFormatConfig::class)
 class RhineFrameworkAutoConfiguration {
 
     @Bean
@@ -36,9 +36,9 @@ class RhineFrameworkAutoConfiguration {
     @ConditionalOnMissingBean
     fun baseRedis(redisTemplate: RedisTemplate<String, Any>): BaseRedis = BaseRedis(redisTemplate)
 
-    @Bean
-    @ConditionalOnMissingBean
-    fun restExceptionHandler(): RestExceptionHandler = RestExceptionHandler()
+    // @Bean
+    // @ConditionalOnMissingBean
+    // fun restExceptionHandler(): RestExceptionHandler = RestExceptionHandler()
 
     @Bean
     @ConditionalOnMissingBean

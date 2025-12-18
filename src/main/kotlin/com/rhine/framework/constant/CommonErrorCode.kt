@@ -1,6 +1,6 @@
 package com.rhine.framework.constant
 
-enum class CommonErrorCode(val code: String, val message: String) {
+enum class CommonErrorCode(override val code: String, override val message: String) : StatusCode {
     // 用户相关错误
     USER_NOT_FOUND("E00010001", "用户不存在"),
     INVALID_USERNAME("E00011002", "JWT 中未包含有效的用户名"),
