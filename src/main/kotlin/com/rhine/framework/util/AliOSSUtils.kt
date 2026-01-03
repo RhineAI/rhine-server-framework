@@ -66,6 +66,8 @@ class AliOSSUtils(private var redisUtil: RedisUtil) {
     private val lockKey = "lock:oss:token"
     private val lockExpire = 5000L  // 锁有效期5秒
 
+    private val logger = LoggerFactory.getLogger(AliOSSUtils::class.java)
+
     fun getAuthToken() {
         val provider: StaticCredentialProvider = StaticCredentialProvider.create(
             Credential.builder() // Please ensure that the environment variables ALIBABA_CLOUD_ACCESS_KEY_ID and ALIBABA_CLOUD_ACCESS_KEY_SECRET are set.
@@ -171,7 +173,7 @@ class AliOSSUtils(private var redisUtil: RedisUtil) {
                 client.close()
                 return
             } catch (e: Exception) {
-                e.printStackTrace()
+                logger.error("Token refresh failed", e)
                 if (++retryCount >= maxRetries) {
                     throw BusinessException(CommonErrorCode.INTERNAL_ERROR, "Token刷新失败: ${e.message}")
                 }

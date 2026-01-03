@@ -7,6 +7,7 @@ import com.aliyun.sdk.service.dysmsapi20170525.models.SendSmsRequest
 import com.aliyun.sdk.service.dysmsapi20170525.models.SendSmsResponse
 import com.google.gson.Gson
 import darabonba.core.client.ClientOverrideConfiguration
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
 import org.springframework.stereotype.Component
@@ -15,6 +16,8 @@ import java.util.concurrent.CompletableFuture
 @Component
 @Configuration
 class SMSSendUtil {
+
+    private val logger = LoggerFactory.getLogger(SMSSendUtil::class.java)
 
     @Value("\${aliyun.sms.access-key-id}")
     lateinit var accessKeyId: String
@@ -51,7 +54,7 @@ class SMSSendUtil {
 
         val response: CompletableFuture<SendSmsResponse> = client.sendSms(smsRequest)
         val resp = response.get() // 同步获取结果
-        println(Gson().toJson(resp)) // 可替换为日志框架
+        logger.info("SMS Send Response: {}", Gson().toJson(resp))
         return resp
     }
 

@@ -25,7 +25,10 @@ class RestExceptionHandler {
         var cause: Throwable? = ex
         while (cause != null) {
             if (cause is BusinessException) {
-                return handleBusinessException(cause, request)
+                // Return 401 with the business exception message instead of delegating to handleBusinessException (which returns 400)
+                log.warn("Authentication error (BusinessException): {}", cause.message)
+                val body = ErrorResponse(code = cause.code, message = cause.message ?: CommonErrorCode.AUTHENTICATION_FAILED.message, path = request.requestURI)
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(body)
             }
             cause = cause.cause
         }

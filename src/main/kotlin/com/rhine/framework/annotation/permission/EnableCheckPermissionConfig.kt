@@ -16,47 +16,59 @@ class EnableCheckPermissionConfig(
     @Bean
     fun checkPermissionAspect(): CheckPermissionAspect = object : CheckPermissionAspect() {
         override fun getUserHasPermission(userId: String?): List<String> {
-            if (userId.isNullOrBlank()) throw NoPermissionException()
-
-            // Feature-level permissions stored as Redis Set: fp:{userId}:feature
-            val featureKey = "fp:$userId:feature"
-            val featureIds = runCatching { stringRedisTemplate.opsForSet().members(featureKey) }
-                .getOrNull()
-                ?.map { it.toString() }
-                ?: emptyList()
-
-            // Menu-level permissions stored as Redis Set: fp:{userId}:menu (optional)
-            val menuKey = "fp:$userId:menu"
-            val menuIds = runCatching { stringRedisTemplate.opsForSet().members(menuKey) }
-                .getOrNull()
-                ?.map { it.toString() }
-                ?: emptyList()
-
-            // Legacy map storage: user:promission:{userId} -> { "user:promission:": [codes...] }
-            val legacyKey = "user:promission:$userId"
-            val legacyRaw = baseRedis.getObject(legacyKey)
-            val legacyList: List<String> = if (legacyRaw is Map<*, *>) {
-                val v = legacyRaw["user:promission:"]
-                when (v) {
-                    is Collection<*> -> v.mapNotNull { it?.toString() }
-                    is Array<*> -> v.mapNotNull { it?.toString() }
-                    is String -> listOf(v)
-                    else -> emptyList()
-                }
-            } else emptyList()
-
-            // Add roles from JWT token if available in SecurityContext
-            val roles: List<String> = runCatching {
-                val context = SecurityContextHolder.getContext()
-                val auth = context.authentication
+            val roleNames: List<String> = runCatching {
+                val auth = SecurityContextHolder.getContext()?.authentication
                 if (auth != null && auth.isAuthenticated) {
-                    auth.authorities.map { it.authority }
+                    auth.authorities.mapNotNull { it?.authority }.filter { it.isNotBlank() }
                 } else {
                     emptyList()
                 }
             }.getOrElse { emptyList() }
 
-            return (featureIds + menuIds + legacyList + roles).distinct()
+            val rolePermCodes: List<String> = if (roleNames.isNotEmpty()) {
+                roleNames.flatMap { roleName ->
+                    val roleKey = "perm:role:$roleName"
+                    runCatching { stringRedisTemplate.opsForSet().members(roleKey) }
+                        .getOrNull()
+                        ?.map { it.toString() }
+                        ?: emptyList()
+                }
+            } else {
+                emptyList()
+            }
+
+            val userPermCodes: List<String> = if (!userId.isNullOrBlank()) {
+                val permKey = "perm:$userId"
+                runCatching { stringRedisTemplate.opsForSet().members(permKey) }
+                    .getOrNull()
+                    ?.map { it.toString() }
+                    ?: emptyList()
+            } else {
+                emptyList()
+            }
+
+            // Legacy map storage: user:promission:{userId} -> { "user:promission:": [codes...] }
+            val legacyList: List<String> = if (!userId.isNullOrBlank()) {
+                val legacyKey = "user:promission:$userId"
+                val legacyRaw = baseRedis.getObject(legacyKey)
+                if (legacyRaw is Map<*, *>) {
+                    val v = legacyRaw["user:promission:"]
+                    when (v) {
+                        is Collection<*> -> v.mapNotNull { it?.toString() }
+                        is Array<*> -> v.mapNotNull { it?.toString() }
+                        is String -> listOf(v)
+                        else -> emptyList()
+                    }
+                } else {
+                    emptyList()
+                }
+            } else {
+                emptyList()
+            }
+
+            val merged = (rolePermCodes + userPermCodes + legacyList).distinct()
+            if (merged.isEmpty()) throw NoPermissionException()
+            return merged
         }
     }
 }

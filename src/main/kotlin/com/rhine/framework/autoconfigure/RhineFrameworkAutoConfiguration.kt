@@ -36,9 +36,10 @@ class RhineFrameworkAutoConfiguration {
     @ConditionalOnMissingBean
     fun baseRedis(redisTemplate: RedisTemplate<String, Any>): BaseRedis = BaseRedis(redisTemplate)
 
-    // @Bean
-    // @ConditionalOnMissingBean
-    // fun restExceptionHandler(): RestExceptionHandler = RestExceptionHandler()
+    @Bean
+    @ConditionalOnMissingBean
+    fun restExceptionHandler(): com.rhine.framework.exception.RestExceptionHandler = com.rhine.framework.exception.RestExceptionHandler()
+
 
     @Bean
     @ConditionalOnMissingBean
