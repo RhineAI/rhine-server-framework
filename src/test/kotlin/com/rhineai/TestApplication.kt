@@ -1,0 +1,8 @@
+package com.rhineai
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
+import org.springframework.boot.SpringBootConfiguration
+
+@SpringBootConfiguration
+@EnableAutoConfiguration
+class TestApplication
