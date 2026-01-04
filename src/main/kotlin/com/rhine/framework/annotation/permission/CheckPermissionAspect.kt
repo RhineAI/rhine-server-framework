@@ -41,6 +41,10 @@ abstract class CheckPermissionAspect {
             throw NoPermissionException()
         }
 
+        if (permissions.contains("*")) {
+            return
+        }
+
         val hasPermission = when (logical) {
             Logical.AND -> validRequired.all { permissions.contains(it) }
             Logical.OR -> validRequired.any { permissions.contains(it) }
