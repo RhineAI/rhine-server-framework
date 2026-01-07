@@ -34,6 +34,7 @@ class TranslatorSerializer : StdSerializer<Any>(Any::class.java), ContextualSeri
             try {
                 gen.writeObject(t.translate(value.toString()))
             } catch (e: Exception) {
+                e.printStackTrace()
                 gen.writeObject(value)
             }
         } else {

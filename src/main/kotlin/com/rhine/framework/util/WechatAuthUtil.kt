@@ -38,6 +38,7 @@ class WechatAuthUtil(
                 wechatAccessToken = requestAccessToken(code, appId, appSecret)
             }
         } catch (e: Exception) {
+            e.printStackTrace()
             val lockKey = StrUtil.format(REFRESH_LOCK_KEY, appId)
             return try {
                 if (redisUtil.acquireLock(lockKey, 5)) {
@@ -63,6 +64,7 @@ class WechatAuthUtil(
             val cached: WechatUserInfo? = try {
                 redisUtil.getBean(cacheKey, WechatUserInfo::class.java) as WechatUserInfo
             } catch (e: Exception) {
+                e.printStackTrace()
                 null
             }
             val userInfo = cached ?: requestUserInfo(accessToken, openId).also {
@@ -135,6 +137,7 @@ class WechatAuthUtil(
                 try {
                     return block()
                 } catch (e: Exception) {
+                    e.printStackTrace()
                     if (retryCount++ >= maxRetries) throw e
                     Thread.sleep(1000L * retryCount)
                 }

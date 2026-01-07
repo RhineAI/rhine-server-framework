@@ -11,6 +11,7 @@ object TranslatorFactory {
             try {
                 clazz.getDeclaredConstructor().newInstance()
             } catch (e: Exception) {
+                e.printStackTrace()
                 throw UnsupportedOperationException(e.message, e)
             }
         } as Translator<Any>

@@ -173,6 +173,7 @@ class AliOSSUtils(private var redisUtil: RedisUtil) {
                 client.close()
                 return
             } catch (e: Exception) {
+                e.printStackTrace()
                 logger.error("Token refresh failed", e)
                 if (++retryCount >= maxRetries) {
                     throw BusinessException(CommonErrorCode.INTERNAL_ERROR, "Token刷新失败: ${e.message}")
@@ -236,6 +237,7 @@ class AliOSSUtils(private var redisUtil: RedisUtil) {
                 val filePath = FileUtils().getFilePath(fileId, ext)
                 uploadStream(it, "$preLabel$filePath")
             } catch (e: Exception) {
+                e.printStackTrace()
                 logger.error("Failed to upload file with fileId: $fileId, ext: $ext", e)
                 throw BusinessException(CommonErrorCode.INTERNAL_ERROR, "File upload failed: ${e.message}")
             }

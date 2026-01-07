@@ -109,7 +109,8 @@ class DataPermissionAspect(
             try {
                 val intfMethod = intf.getMethod(sig.method.name, *sig.method.parameterTypes)
                 intfMethod.getAnnotation(DataPermission::class.java)?.let { return it }
-            } catch (_: NoSuchMethodException) {
+            } catch (e: NoSuchMethodException) {
+                e.printStackTrace()
                 // ignore and continue
             }
         }

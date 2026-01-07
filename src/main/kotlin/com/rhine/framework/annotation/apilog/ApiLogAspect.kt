@@ -54,6 +54,9 @@ class ApiLogAspect(
     }
 
     private fun safeJson(obj: Any?): String {
-        return try { Gson().toJson(obj) } catch (e: Exception) { obj?.toString() ?: "null" }
+        return try { Gson().toJson(obj) } catch (e: Exception) {
+            e.printStackTrace()
+            obj?.toString() ?: "null"
+        }
     }
 }
