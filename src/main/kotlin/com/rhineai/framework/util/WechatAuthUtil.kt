@@ -3,9 +3,9 @@ package com.rhineai.framework.util
 import cn.hutool.core.util.StrUtil
 import cn.hutool.http.HttpUtil
 import cn.hutool.json.JSONUtil
-import com.rhine.framework.config.WechatConfig
-import com.rhine.framework.entity.vo.login.wechat.WechatAccessToken
-import com.rhine.framework.entity.vo.login.wechat.WechatUserInfo
+import com.rhineai.framework.config.WechatConfig
+import com.rhineai.framework.entity.vo.login.wechat.WechatAccessToken
+import com.rhineai.framework.entity.vo.login.wechat.WechatUserInfo
 import org.springframework.stereotype.Component
 import java.util.concurrent.TimeUnit
 

@@ -1,7 +1,7 @@
-package com.rhine.framework.annotation.apilog
+package com.rhineai.framework.annotation.apilog
 
-import com.rhine.framework.exception.RestExceptionHandler
-import com.rhine.framework.test.DummyController
+import com.rhineai.framework.exception.RestExceptionHandler
+import com.rhineai.framework.test.DummyController
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc

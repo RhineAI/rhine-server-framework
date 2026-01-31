@@ -1,11 +1,11 @@
-package com.rhine.framework.test
+package com.rhineai.framework.test
 
-import com.rhine.framework.annotation.permission.Permission
+import com.rhineai.framework.annotation.permission.Permission
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
-import com.rhine.framework.annotation.permission.Logical
+import com.rhineai.framework.annotation.permission.Logical
 
 @RestController
 open class ProtectedController {

@@ -8,7 +8,7 @@ plugins {
     id("maven-publish")
 }
 
-group = "com.rhine"
+group = "com.rhineai"
 version = "0.0.1-SNAPSHOT"
 description = "rhine-server-framework"
 

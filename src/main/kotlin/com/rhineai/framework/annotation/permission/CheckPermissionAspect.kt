@@ -1,6 +1,6 @@
 package com.rhineai.framework.annotation.permission
 
-import com.rhine.framework.exception.NoPermissionException
+import com.rhineai.framework.exception.NoPermissionException
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before

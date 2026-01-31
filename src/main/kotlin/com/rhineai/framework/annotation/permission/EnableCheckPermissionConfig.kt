@@ -1,7 +1,7 @@
 package com.rhineai.framework.annotation.permission
 
-import com.rhine.framework.exception.NoPermissionException
-import com.rhine.framework.redis.BaseRedis
+import com.rhineai.framework.exception.NoPermissionException
+import com.rhineai.framework.redis.BaseRedis
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.core.StringRedisTemplate

@@ -1,11 +1,11 @@
 package com.rhineai.framework.autoconfigure
 
-import com.rhine.framework.annotation.apilog.ApiLogAspect
-import com.rhine.framework.annotation.apilog.ApiLogProperties
-import com.rhine.framework.config.JacksonFormatConfig
-import com.rhine.framework.config.RedisConfig
-import com.rhine.framework.config.OpenApiConfig
-import com.rhine.framework.redis.BaseRedis
+import com.rhineai.framework.annotation.apilog.ApiLogAspect
+import com.rhineai.framework.annotation.apilog.ApiLogProperties
+import com.rhineai.framework.config.JacksonFormatConfig
+import com.rhineai.framework.config.RedisConfig
+import com.rhineai.framework.config.OpenApiConfig
+import com.rhineai.framework.redis.BaseRedis
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
@@ -13,14 +13,14 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
-import com.rhine.framework.annotation.datapermission.DataPermissionAspect
+import com.rhineai.framework.annotation.datapermission.DataPermissionAspect
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import jakarta.persistence.EntityManager
 import jakarta.persistence.EntityManagerFactory
-import com.rhine.framework.annotation.datapermission.DataPermissionProperties
-import com.rhine.framework.annotation.datapermission.AclIdsProvider
+import com.rhineai.framework.annotation.datapermission.DataPermissionProperties
+import com.rhineai.framework.annotation.datapermission.AclIdsProvider
 import org.springframework.data.redis.core.RedisTemplate
-import com.rhine.framework.spring.SpringContextHolder
+import com.rhineai.framework.spring.SpringContextHolder
 
 @Configuration
 @EnableConfigurationProperties(value = [ApiLogProperties::class, DataPermissionProperties::class])
@@ -38,7 +38,7 @@ class RhineFrameworkAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    fun restExceptionHandler(): com.rhine.framework.exception.RestExceptionHandler = com.rhine.framework.exception.RestExceptionHandler()
+    fun restExceptionHandler(): com.rhineai.framework.exception.RestExceptionHandler = com.rhineai.framework.exception.RestExceptionHandler()
 
 
     @Bean

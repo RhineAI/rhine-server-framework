@@ -1,6 +1,6 @@
 package com.rhineai.framework.exception
 
-import com.rhine.framework.constant.StatusCode
+import com.rhineai.framework.constant.StatusCode
 
 
 class BusinessException(

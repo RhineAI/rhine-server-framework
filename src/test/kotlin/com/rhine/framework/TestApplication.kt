@@ -1,4 +1,4 @@
-package com.rhine.framework
+package com.rhineai.framework
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.SpringBootConfiguration

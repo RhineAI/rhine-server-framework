@@ -1,6 +1,6 @@
 package com.rhineai.framework.annotation.datapermission
 
-import com.rhine.framework.util.RedisUtil
+import com.rhineai.framework.util.RedisUtil
 import jakarta.persistence.Table
 import org.springframework.stereotype.Component
 

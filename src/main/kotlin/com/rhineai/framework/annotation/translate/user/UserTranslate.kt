@@ -1,7 +1,7 @@
 package com.rhineai.framework.annotation.translate.user
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside
-import com.rhine.framework.annotation.translate.Translate
+import com.rhineai.framework.annotation.translate.Translate
 
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)

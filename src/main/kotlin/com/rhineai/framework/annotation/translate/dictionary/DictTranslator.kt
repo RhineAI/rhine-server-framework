@@ -1,10 +1,10 @@
 package com.rhineai.framework.annotation.translate.dictionary
 
 import com.fasterxml.jackson.databind.BeanProperty
-import com.rhine.framework.annotation.translate.Translator
-import com.rhine.framework.entity.vo.translator.dictionary.DataDictionary
-import com.rhine.framework.redis.BaseRedis
-import com.rhine.framework.spring.SpringContextHolder
+import com.rhineai.framework.annotation.translate.Translator
+import com.rhineai.framework.entity.vo.translator.dictionary.DataDictionary
+import com.rhineai.framework.redis.BaseRedis
+import com.rhineai.framework.spring.SpringContextHolder
 
 class DictTranslator : Translator<List<DataDictionary>> {
     private var dictType: String = ""

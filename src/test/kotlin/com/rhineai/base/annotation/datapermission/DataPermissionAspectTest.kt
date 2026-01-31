@@ -1,4 +1,4 @@
-package com.rhine.framework.annotation.datapermission
+package com.rhineai.framework.annotation.datapermission
 
 import jakarta.persistence.*
 import org.hibernate.annotations.Filter

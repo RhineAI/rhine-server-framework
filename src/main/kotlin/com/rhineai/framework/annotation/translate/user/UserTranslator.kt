@@ -3,10 +3,10 @@ package com.rhineai.framework.annotation.translate.user
 import cn.hutool.json.JSONUtil
 import cn.hutool.json.JSONObject
 import com.fasterxml.jackson.databind.BeanProperty
-import com.rhine.framework.annotation.translate.Translator
-import com.rhine.framework.entity.vo.translator.user.DataUser
-import com.rhine.framework.redis.BaseRedis
-import com.rhine.framework.spring.SpringContextHolder
+import com.rhineai.framework.annotation.translate.Translator
+import com.rhineai.framework.entity.vo.translator.user.DataUser
+import com.rhineai.framework.redis.BaseRedis
+import com.rhineai.framework.spring.SpringContextHolder
 
 class UserTranslator : Translator<List<DataUser>> {
     override fun property(property: BeanProperty) {

@@ -1,6 +1,6 @@
-package com.rhine.framework.exception
+package com.rhineai.framework.exception
 
-import com.rhine.framework.test.DummyController
+import com.rhineai.framework.test.DummyController
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc

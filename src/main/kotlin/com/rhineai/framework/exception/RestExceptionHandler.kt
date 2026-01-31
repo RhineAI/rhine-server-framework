@@ -1,7 +1,7 @@
 package com.rhineai.framework.exception
 
-import com.rhine.framework.constant.CommonErrorCode
-import com.rhine.framework.entity.vo.ErrorResponse
+import com.rhineai.framework.constant.CommonErrorCode
+import com.rhineai.framework.entity.vo.ErrorResponse
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.ConstraintViolationException
 import org.slf4j.LoggerFactory

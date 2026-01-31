@@ -1,6 +1,6 @@
 package com.rhineai.framework.annotation.datapermission
 
-import com.rhine.framework.exception.NoPermissionException
+import com.rhineai.framework.exception.NoPermissionException
 import jakarta.persistence.EntityManager
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.ProceedingJoinPoint

@@ -10,9 +10,9 @@ import com.aliyun.oss.common.auth.DefaultCredentialProvider
 import com.aliyun.sdk.service.sts20150401.AsyncClient
 import com.aliyun.sdk.service.sts20150401.models.AssumeRoleRequest
 import com.aliyun.sdk.service.sts20150401.models.AssumeRoleResponse
-import com.rhine.framework.constant.CommonErrorCode
-import com.rhine.framework.entity.vo.alioss.TokenStatus
-import com.rhine.framework.exception.BusinessException
+import com.rhineai.framework.constant.CommonErrorCode
+import com.rhineai.framework.entity.vo.alioss.TokenStatus
+import com.rhineai.framework.exception.BusinessException
 import darabonba.core.client.ClientOverrideConfiguration
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value

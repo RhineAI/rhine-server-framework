@@ -1,4 +1,4 @@
-package com.rhine.framework
+package com.rhineai.framework
 
 import com.rhineai.TestApplication
 import org.junit.jupiter.api.Test

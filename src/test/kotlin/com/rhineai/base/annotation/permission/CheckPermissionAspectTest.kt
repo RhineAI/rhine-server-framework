@@ -1,7 +1,7 @@
-package com.rhine.framework.annotation.permission
+package com.rhineai.framework.annotation.permission
 
-import com.rhine.framework.exception.RestExceptionHandler
-import com.rhine.framework.test.ProtectedController
+import com.rhineai.framework.exception.RestExceptionHandler
+import com.rhineai.framework.test.ProtectedController
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.aop.AopAutoConfiguration

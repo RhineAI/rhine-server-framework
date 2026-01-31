@@ -1,8 +1,8 @@
-package com.rhine.framework.test
+package com.rhineai.framework.test
 
-import com.rhine.framework.annotation.apilog.ApiLog
-import com.rhine.framework.constant.CommonErrorCode
-import com.rhine.framework.exception.BusinessException
+import com.rhineai.framework.annotation.apilog.ApiLog
+import com.rhineai.framework.constant.CommonErrorCode
+import com.rhineai.framework.exception.BusinessException
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
