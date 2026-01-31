@@ -71,7 +71,7 @@ publishing {
         create("mavenJava", org.gradle.api.publish.maven.MavenPublication::class) {
             from(components["java"])
             groupId = group.toString()
-            artifactId = "rhine-framework"
+            artifactId = "rhine-server-framework"
             version = project.version.toString()
         }
     }
