@@ -20,7 +20,7 @@ import java.util.Date
 class JacksonFormatConfig {
 
     @Bean
-    @ConditionalOnProperty(prefix = FormatProperties.PREFIX, name = ["long-to-string"], havingValue = "true")
+    @ConditionalOnProperty(prefix = FormatProperties.PREFIX, name = ["long-to-string"], havingValue = "true", matchIfMissing = true)
     fun longToStringCustomizer(): Jackson2ObjectMapperBuilderCustomizer {
         return Jackson2ObjectMapperBuilderCustomizer { builder ->
             builder.serializerByType(Long::class.java, ToStringSerializer.instance)
@@ -29,7 +29,7 @@ class JacksonFormatConfig {
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = FormatProperties.PREFIX, name = ["date-to-timestamp-string"], havingValue = "true")
+    @ConditionalOnProperty(prefix = FormatProperties.PREFIX, name = ["date-to-timestamp-string"], havingValue = "true", matchIfMissing = true)
     fun dateToTimestampStringCustomizer(): Jackson2ObjectMapperBuilderCustomizer {
         return Jackson2ObjectMapperBuilderCustomizer { builder ->
             builder.serializerByType(Date::class.java, DateToTimestampStringSerializer())

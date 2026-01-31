@@ -11,10 +11,10 @@ class FormatProperties {
     /**
      * Whether to convert all Long values to String in response.
      */
-    var longToString: Boolean = false
+    var longToString: Boolean = true
 
     /**
      * Whether to convert all Date/Time values to timestamp String in response.
      */
-    var dateToTimestampString: Boolean = false
+    var dateToTimestampString: Boolean = true
 }
