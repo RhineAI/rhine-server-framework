@@ -29,6 +29,7 @@ abstract class CheckPermissionAspect {
         val permissionAnn = getAspectPermission(joinPoint) ?: throw NoPermissionException()
         val required = permissionAnn.value
         val logical = permissionAnn.logical
+        val excluded = permissionAnn.exclude
 
         if (required.isEmpty()) return
 
@@ -38,6 +39,12 @@ abstract class CheckPermissionAspect {
 
         if (permissions.isNullOrEmpty()) {
             logger.warn("Permission denied for user [$userId]. User has no permissions. Required: ${validRequired.joinToString()}")
+            throw NoPermissionException()
+        }
+
+        val validExcluded = excluded.filter { it.isNotBlank() }
+        if (validExcluded.isNotEmpty() && validExcluded.any { permissions.contains(it) }) {
+            logger.warn("Permission denied for user [$userId]. Excluded: ${validExcluded.joinToString()}, User Permissions: $permissions")
             throw NoPermissionException()
         }
 

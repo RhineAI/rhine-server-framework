@@ -1,2 +1,4 @@
 com.rhineai.framework.autoconfigure.RhineFrameworkAutoConfiguration
+com.rhineai.framework.autoconfigure.OssAutoConfiguration
 com.rhineai.framework.FrameworkConfig
+com.rhineai.framework.util.RedisUtil

@@ -9,5 +9,6 @@ enum class Logical {
 @MustBeDocumented
 annotation class Permission(
     vararg val value: String,
-    val logical: Logical = Logical.OR
+    val logical: Logical = Logical.OR,
+    val exclude: Array<String> = []
 )
